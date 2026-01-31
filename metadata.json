@@ -1,0 +1,5 @@
+{
+  "name": "The Bounty Floor",
+  "description": "A high-stakes, gamified developer bounty marketplace inspired by high-frequency trading floors and Jira. Features real-time market stats, a competitive leaderboard, and an arsenal of power-ups.",
+  "requestFramePermissions": []
+}
