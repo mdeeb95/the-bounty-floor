@@ -59,7 +59,7 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
               CONTRACT_ID: {bounty.id.padStart(6, '0')} // NODE: {bounty.project}
             </div>
           </div>
-          <button 
+          <button
             onClick={onClose}
             className="text-primary hover:text-white transition-colors text-2xl font-black"
           >
@@ -140,12 +140,14 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
                       </div>
                     ) : (
                       <div className="space-y-3 font-mono">
-                        {briefing?.steps.map((step, i) => (
+                        {briefing && briefing.steps && Array.isArray(briefing.steps) ? briefing.steps.map((step, i) => (
                           <div key={i} className="flex gap-3 text-sm text-primary/90 font-bold italic">
                             <span>{i + 1}.</span>
                             <p className={isCompleted ? 'line-through opacity-40' : ''}>{step}</p>
                           </div>
-                        ))}
+                        )) : (
+                          <div className="text-primary/60 italic text-sm">Intel stream compromised. Stand by...</div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -178,11 +180,11 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
               <div className="bg-white/5 p-4 rounded-xl border border-white/10">
                 <p className="text-[10px] text-white/40 uppercase font-black mb-1">Executor Status</p>
                 <div className="flex -space-x-2 mt-2">
-                   {isAvailable ? (
-                     <div className="size-8 rounded-full border-2 border-white/10 bg-black/40 flex items-center justify-center text-xs text-white/20">?</div>
-                   ) : (
+                  {isAvailable ? (
+                    <div className="size-8 rounded-full border-2 border-white/10 bg-black/40 flex items-center justify-center text-xs text-white/20">?</div>
+                  ) : (
                     <div className="size-8 rounded-full border-2 border-gold bg-cover bg-center" style={{ backgroundImage: `url('https://picsum.photos/seed/you/100/100')` }}></div>
-                   )}
+                  )}
                 </div>
                 <p className="text-[10px] text-primary font-black mt-2 uppercase">
                   {isCompleted ? 'Extraction Completed' : isClaimed ? 'You are sole executor' : 'Awaiting Assignment'}
@@ -192,7 +194,7 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
 
             <div className="mt-auto pt-8 border-t border-primary/10">
               {isAvailable && (
-                <button 
+                <button
                   onClick={handleClaim}
                   disabled={isClaiming}
                   className="w-full bg-primary hover:bg-white text-black font-black uppercase italic py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(255,107,0,0.3)] mb-4 disabled:opacity-50 animate-pulse"
@@ -202,7 +204,7 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
               )}
 
               {isClaimed && (
-                <button 
+                <button
                   onClick={handleCommit}
                   disabled={isCommitting}
                   className="w-full bg-primary hover:bg-white text-black font-black uppercase italic py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(255,107,0,0.3)] mb-4 disabled:opacity-50 disabled:cursor-wait"
@@ -217,7 +219,7 @@ const BountyDetailModal: React.FC<BountyDetailModalProps> = ({ bounty, onClose, 
                 </div>
               )}
 
-              <button 
+              <button
                 onClick={onClose}
                 className="w-full bg-white/5 hover:bg-white/10 text-white/60 font-black uppercase italic py-4 rounded-xl border border-white/10 transition-all text-xs"
               >
